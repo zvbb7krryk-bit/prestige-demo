@@ -212,6 +212,125 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2rem 4
 footer p{font-size:0.65rem;color:var(--muted)}
 @media(max-width:600px){footer{flex-direction:column;text-align:center;padding:1.5rem}}
 
+
+/* ======= KEN BURNS ON ALL IMAGES ======= */
+.gitem img, .tour-slide img {
+  animation: kenBurns 8s ease-in-out infinite alternate;
+}
+@keyframes kenBurns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.gitem:hover img {
+  animation: none;
+  transform: scale(1.05);
+}
+
+/* ======= SECTION TRANSITIONS ======= */
+.section-fade {
+  position: relative;
+}
+.section-fade::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--dark));
+  z-index: 10;
+  pointer-events: none;
+}
+.section-fade::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to top, transparent, var(--dark));
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ======= AMBIENT VIDEO SECTIONS ======= */
+.ambient-section {
+  position: relative;
+  height: 70vh;
+  overflow: hidden;
+}
+.ambient-section video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85);
+}
+.ambient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(8,8,7,0.4) 0%,
+    transparent 30%,
+    transparent 60%,
+    rgba(8,8,7,0.95) 100%
+  );
+  z-index: 1;
+}
+.ambient-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 3rem 4rem;
+}
+
+/* ======= CINEMATIC SCROLL REVEALS ======= */
+.cinema-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  filter: blur(4px);
+  transition: opacity 1s ease, transform 1s ease, filter 1s ease;
+}
+.cinema-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* ======= HERO VIGNETTE ======= */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(8,8,7,0.4) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ======= STATS BAR ANIMATION ======= */
+.sbar-val {
+  animation: countUp 0.5s ease;
+}
+
+/* ======= TOUR SLIDE ENHANCED ======= */
+.tour-slide img {
+  transform-origin: center center;
+}
+.tour-slide.active img {
+  animation: kenBurns 12s ease-in-out infinite alternate;
+}
+
+/* ======= SECTION SEPARATOR ======= */
+.cinema-sep {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(200,164,90,0.3), transparent);
+  margin: 0;
+}
+
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity 0.8s ease,transform 0.8s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -269,7 +388,7 @@ footer p{font-size:0.65rem;color:var(--muted)}
 <!-- DESCRIPTION -->
 <section class="desc-sec">
   <div class="desc-inner">
-    <div class="reveal">
+    <div class="reveal cinema-reveal">
       <span class="tag">The Residence</span>
       <h2 class="sec-title">Architectural Excellence in the Heart of Coral Gables</h2>
       <p class="desc-p">An extraordinary fusion of contemporary design and tropical luxury, this stunning Coral Gables estate redefines modern living. Set behind a private gated entry on nearly an acre, the property commands immediate attention with its striking modern architecture, natural stone accents, and floor-to-ceiling glass that blur the line between interior and exterior.</p>
@@ -283,7 +402,7 @@ footer p{font-size:0.65rem;color:var(--muted)}
         <div class="hl">3-car garage, gated entry, tropical landscaping on 0.8 acres</div>
       </div>
     </div>
-    <div class="reveal">
+    <div class="reveal cinema-reveal">
       <span class="tag">Property Snapshot</span>
       <h2 class="sec-title" style="font-size:clamp(1.4rem,2.5vw,2rem)">Coral Gables — Miami's Most Prestigious Address</h2>
       <p class="desc-p" style="margin-bottom:1.5rem">Coral Gables consistently ranks among Florida's most sought-after municipalities — tree-lined boulevards, top-rated schools, and minutes from Miami's finest dining, art, and culture.</p>
@@ -353,6 +472,7 @@ footer p{font-size:0.65rem;color:var(--muted)}
 </section>
 
 
+<div class="cinema-sep"></div>
 <!-- VIDEO 2 — LIVING ROOM TO KITCHEN -->
 <section style="padding:0;background:var(--black);position:relative;height:70vh;overflow:hidden">
   <video style="width:100%;height:100%;object-fit:cover;filter:brightness(0.85)" autoplay muted loop playsinline>
@@ -366,6 +486,7 @@ footer p{font-size:0.65rem;color:var(--muted)}
   </div>
 </section>
 
+<div class="cinema-sep"></div>
 <!-- ROOM TOUR -->
 <section class="tour-sec" id="tour">
   <div class="tour-inner">
@@ -409,6 +530,7 @@ footer p{font-size:0.65rem;color:var(--muted)}
 </section>
 
 
+<div class="cinema-sep"></div>
 <!-- VIDEO 3 — INTO PRIMARY SUITE -->
 <section style="padding:0;background:var(--black);position:relative;height:70vh;overflow:hidden">
   <video style="width:100%;height:100%;object-fit:cover;filter:brightness(0.85)" autoplay muted loop playsinline>
@@ -422,10 +544,11 @@ footer p{font-size:0.65rem;color:var(--muted)}
   </div>
 </section>
 
+<div class="cinema-sep"></div>
 <!-- CALCULATOR -->
 <section class="calc-sec" id="calculator">
   <div class="calc-inner">
-    <div class="reveal">
+    <div class="reveal cinema-reveal">
       <span class="tag">Finance This Home</span>
       <h2 class="sec-title">Mortgage Calculator</h2>
       <p style="color:var(--muted);line-height:1.85;margin-bottom:2rem;font-size:0.9rem">Estimate your monthly payment for 100 Prestige Lane.</p>
@@ -450,12 +573,13 @@ footer p{font-size:0.65rem;color:var(--muted)}
   </div>
 </section>
 
+<div class="cinema-sep"></div>
 <!-- NEIGHBORHOOD -->
 <section class="hood-sec" id="neighborhood">
   <div class="hood-inner">
     <span class="tag reveal">Location</span>
     <h2 class="sec-title reveal">Coral Gables — The City Beautiful</h2>
-    <p class="reveal" style="color:var(--muted);line-height:1.85;max-width:560px;font-size:0.92rem">One of Florida's most prestigious municipalities — Mediterranean architecture, tree-lined boulevards, and a world-class lifestyle just minutes from Miami's best.</p>
+    <p class="reveal cinema-reveal" style="color:var(--muted);line-height:1.85;max-width:560px;font-size:0.92rem">One of Florida's most prestigious municipalities — Mediterranean architecture, tree-lined boulevards, and a world-class lifestyle just minutes from Miami's best.</p>
     <div class="hood-grid reveal">
       <div class="hc"><span class="hc-em">🌴</span><h3 class="hc-name">Miracle Mile</h3><p class="hc-desc">Coral Gables' iconic shopping and dining destination — boutiques, restaurants and entertainment steps away.</p><span class="hc-dist">5 minutes away</span></div>
       <div class="hc"><span class="hc-em">🏊</span><h3 class="hc-name">Venetian Pool</h3><p class="hc-desc">One of the most beautiful public pools in the world — a historic landmark carved from coral rock.</p><span class="hc-dist">3 minutes away</span></div>
@@ -467,6 +591,7 @@ footer p{font-size:0.65rem;color:var(--muted)}
   </div>
 </section>
 
+<div class="cinema-sep"></div>
 <!-- LEAD FORM -->
 <section class="lead-sec" id="contact">
   <div class="lead-inner">
@@ -565,8 +690,25 @@ function submitForm(e){
   btn.textContent='✓ We\'ll Be In Touch — Thank You!';
   btn.style.background='#3d6b3d';btn.disabled=true;
 }
-const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{
+  if(e.isIntersecting){
+    e.target.classList.add('visible');
+  }
+}),{threshold:0.06, rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal, .cinema-reveal').forEach(el=>obs.observe(el));
+
+// Pause videos when not in view for performance
+const videoObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    const video = e.target;
+    if(e.isIntersecting) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  });
+}, {threshold: 0.2});
+document.querySelectorAll('video').forEach(v => videoObs.observe(v));
 </script>
 </body>
 </html>
